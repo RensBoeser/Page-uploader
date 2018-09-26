@@ -1,0 +1,20 @@
+{
+  "name": "page-uploader",
+  "version": "1.0.0",
+  "description": "page uploader for IGEMwikis",
+  "main": "uploader.js",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "globby": "^8.0.1",
+    "igemwiki-api": "^1.1.1",
+    "jsc": "^0.3.11",
+    "lodash": "^4.17.10",
+    "python-shell": "^0.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "run": "node uploader.js"
+  },
+  "author": "Rens Boeser",
+  "license": "ISC"
+}
