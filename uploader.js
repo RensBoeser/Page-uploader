@@ -4,14 +4,15 @@ const igemwiki = require('igemwiki-api')({ year: 2018, teamName: 'Rotterdam_HR' 
 const Promise = require('bluebird')
 const globby = require('globby')
 const _ = require('lodash')
+const _dir = __dirname + '../../../www/'
 
 const index = {
   type: 'page',
-  fileName: path.resolve(__dirname, '../app/lib/generated html/index.html'),
+  fileName: path.resolve(_dir, 'generated html/index.html'),
   page: ''
 }
 
-const getTemplates = globby([ '../templates/*.html' ]).then(function (templates) {
+const getTemplates = globby([ path.resolve(_dir, 'templates/*.html') ]).then(function (templates) {
   return templates.map(function (template) {
     return {
       type: 'template',
@@ -21,7 +22,7 @@ const getTemplates = globby([ '../templates/*.html' ]).then(function (templates)
   })
 })
 
-const getCSS = globby([ '../css/**/*.css' ]).then((stylesheets) => {
+const getCSS = globby([ path.resolve(_dir, 'css/*.css') ]).then((stylesheets) => {
   return stylesheets.map((stylesheet) => {
     return {
       type: 'stylesheet',
@@ -31,19 +32,19 @@ const getCSS = globby([ '../css/**/*.css' ]).then((stylesheets) => {
   })
 })
 
-const getJS = globby([ '../js/**/*.js' ]).then(scripts => scripts.map(script => ({
+const getJS = globby([ path.resolve(_dir, 'js/*.js') ]).then(scripts => scripts.map(script => ({
   type: 'script',
   fileName: path.resolve(__dirname, script),
   page: path.basename(script).replace('.js', '')
 })))
 
-const getPages = globby([ '../app/lib/generated html/*.html' ]).then(pages => pages.map(page => ({
+const getPages = globby([ path.resolve(_dir, 'generated html/*.html') ]).then(pages => pages.map(page => ({
 	type: 'page',
 	fileName: path.resolve(__dirname, page),
 	page: path.basename(page).replace('.html', '')
 })))
 
-const getIcons = globby([ '../templates/icon/**/*.html' ]).then(function (icons) {
+const getIcons = globby([ path.resolve(_dir, 'templates/icon/*.html') ]).then(function (icons) {
   return icons.map(function (icon) {
     return {
       type: 'template',
@@ -72,7 +73,7 @@ Promise.all([
       type: c.type,
       dest: c.page,
       source: c.fileName,
-      force: true
+      // force: true
     }))
 
 		// Upload pages
