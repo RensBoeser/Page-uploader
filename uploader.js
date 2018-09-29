@@ -44,15 +44,15 @@ const getPages = globby([ path.resolve(_dir, 'generated html/*.html') ]).then(pa
 	page: path.basename(page).replace('.html', '')
 })))
 
-const getIcons = globby([ path.resolve(_dir, 'templates/icon/*.html') ]).then(function (icons) {
-  return icons.map(function (icon) {
-    return {
-      type: 'template',
-      fileName: path.resolve(__dirname, icon),
-      page: 'icon/' + path.basename(icon).replace('.html', '')
-    }
-  })
-})
+// const getIcons = globby([ path.resolve(_dir, 'templates/icon/*.html') ]).then(function (icons) {
+//   return icons.map(function (icon) {
+//     return {
+//       type: 'template',
+//       fileName: path.resolve(__dirname, icon),
+//       page: 'icon/' + path.basename(icon).replace('.html', '')
+//     }
+//   })
+// })
 
 // Generate page objects
 Promise.all([
@@ -60,8 +60,8 @@ Promise.all([
   getTemplates,
   getCSS,
 	getJS,
-	getPages,
-	getIcons
+	getPages
+	// getIcons
 ]).then((confs) => {
   confs = _.flatten(confs)
 
